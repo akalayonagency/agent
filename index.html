@@ -60,7 +60,7 @@
 
 .buttons{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:10px;
   margin-bottom:14px;
 }
@@ -125,6 +125,7 @@ button.active{
 
   <div class="buttons">
     <button id="bad">Mauvais mois</button>
+     <button id="normal" class="active">Mois normal</button>
     <button id="good">Très bon mois</button>
   </div>
 
@@ -142,6 +143,8 @@ const montant = document.getElementById("montant");
 const gain = document.getElementById("gain");
 const tauxEl = document.getElementById("taux");
 const detail = document.getElementById("detail");
+const normal = document.getElementById("normal");
+  
 
 const bad = document.getElementById("bad");
 const good = document.getElementById("good");
@@ -171,7 +174,7 @@ function calcul(){
   } else if(bonus === 1.3){
     detail.textContent = "Très bon mois : +30% appliqué.";
   } else {
-    detail.textContent = "Calcul standard sans ajustement.";
+    detail.textContent = "Mois normal : aucun bonus ni malus.";
   }
 }
 
@@ -190,6 +193,14 @@ good.onclick = () => {
   bad.classList.remove("active");
   calcul();
 };
+  normal.onclick = () => {
+  bonus = 1;
+  normal.classList.add("active");
+  bad.classList.remove("active");
+  good.classList.remove("active");
+  calcul();
+};
+
 </script>
 
 </body>
