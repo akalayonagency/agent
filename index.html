@@ -1,207 +1,2492 @@
-<!doctype html>
+Oui. Voici une **version unique en une seule page HTML**, avec les 5 sections dans l’ordre, sans changer les éléments, mais en corrigeant la mise en page, les conflits de classes et les scripts incomplets.
+
+À coller dans une seule page Odoo / HTML :
+
+```html
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phone Xpress</title>
 
-<style>
-:root{
-  --gold:#d4af37;
-  --bg:rgba(0,0,0,.35);
-  --border:rgba(212,175,55,.35);
-  --white:#fff;
-  --muted:rgba(255,255,255,.75);
-}
+  <style>
+    :root {
+      --px-blue: #0b8fd8;
+      --px-blue-light: #38c7ff;
+      --px-blue-dark: #033f68;
+      --px-night: #06111c;
+      --px-white: #ffffff;
+      --blue: #1495ff;
+      --blue-2: #44c7ff;
+      --cyan: #42dcff;
+      --blue-deep: #045a95;
+      --soft: rgba(255,255,255,0.72);
+      --card-bg: rgba(255,255,255,0.07);
+      --card-border: rgba(255,255,255,0.12);
+    }
 
-.calc-agent{
-  max-width:520px;
-  margin:auto;
-  padding:16px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:16px;
-  color:var(--white);
-  font-family:Arial,system-ui,sans-serif;
-}
+    * { box-sizing: border-box; }
 
-.calc-agent h2{
-  margin:0 0 6px;
-  font-size:18px;
-  font-weight:900;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      color: var(--px-white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
 
-.calc-agent p{
-  margin:0 0 14px;
-  font-size:13px;
-  color:var(--muted);
-}
+    body {
+      min-height: 100%;
+    }
 
-.input{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  margin-bottom:12px;
-}
+    .px-page {
+      width: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
 
-.input input{
-  flex:1;
-  background:transparent;
-  border:0;
-  outline:none;
-  color:var(--white);
-  font-size:16px;
-  font-weight:900;
-}
+    .px-page-section {
+      width: min(1320px, 100%);
+      margin: 0 auto;
+    }
 
-.unit{ color:var(--gold); font-weight:900; }
+    /* SECTION 1 */
+    .px-about {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 30px 14px;
+    }
 
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  margin-bottom:14px;
-}
+    .px-about-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      overflow: visible;
+    }
 
-button{
-  padding:10px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:rgba(0,0,0,.35);
-  color:var(--white);
-  font-weight:900;
-  cursor:pointer;
-}
+    .px-visual {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      max-height: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(56,199,255,0.38);
+      background: var(--px-night);
+      box-shadow: 0 0 28px rgba(56,199,255,0.18), inset 0 0 35px rgba(56,199,255,0.16);
+    }
 
-button.active{
-  background:linear-gradient(135deg,#e3c15a,#b38a28);
-  color:#000;
-  border:none;
-}
+    .px-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: var(--px-night);
+    }
 
-.result{
-  padding:14px;
-  border-radius:14px;
-  background:rgba(0,0,0,.45);
-  border:1px solid var(--border);
-}
+    .px-visual canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
 
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:999px;
-  background:rgba(212,175,55,.25);
-  border:1px solid var(--gold);
-  font-size:12px;
-  font-weight:900;
-  margin-bottom:8px;
-}
+    .px-photo-note {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.62);
+      border: 1px solid rgba(255,255,255,0.15);
+      z-index: 3;
+    }
 
-.big{
-  font-size:34px;
-  font-weight:900;
-  margin:6px 0;
-}
+    .px-photo-note strong {
+      display: block;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
 
-.small{
-  font-size:13px;
-  color:var(--muted);
-}
-</style>
+    .px-photo-note span {
+      font-size: 11px;
+      color: var(--px-blue-light);
+      font-weight: 800;
+    }
+
+    .px-about-content {
+      align-self: center;
+      padding: 10px 0;
+    }
+
+    .px-about-pill,
+    .px-why-pill,
+    .px-tarifs-pill,
+    .px-exp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+    }
+
+    .px-about-pill {
+      padding: 10px 14px;
+      background: rgba(6,17,28,0.52);
+      border: 1px solid rgba(56,199,255,0.45);
+      font-size: 13px;
+      font-weight: 1000;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.98);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.82);
+    }
+
+    .px-about h1 {
+      font-size: clamp(28px, 3.55vw, 50px);
+      line-height: 0.95;
+      margin: 0 0 14px;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(56,199,255,0.72), 0 0 50px rgba(11,143,216,0.28);
+    }
+
+    .px-about h1 span {
+      color: var(--px-blue-light);
+    }
+
+    .px-lead {
+      font-size: 17px;
+      margin: 0 0 14px;
+      color: rgba(255,255,255,0.95);
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.55);
+    }
+
+    .px-text {
+      font-size: 15px;
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.88);
+      font-weight: 650;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.82), 0 0 9px rgba(0,0,0,0.45);
+    }
+
+    .px-values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .px-value {
+      padding: 14px 12px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045)), rgba(6,17,28,0.34);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: inset 0 0 22px rgba(56,199,255,0.10), inset 0 0 0 1px rgba(56,199,255,0.10);
+      color: rgba(255,255,255,0.94);
+      font-weight: 900;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.85);
+    }
+
+    .px-value b {
+      display: block;
+      color: var(--px-blue-light);
+      margin-bottom: 5px;
+    }
+
+    .px-quote {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(6,17,28,0.52);
+      border: 1px solid rgba(56,199,255,0.38);
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.94);
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.85);
+      box-shadow: inset 0 0 24px rgba(56,199,255,0.10);
+    }
+
+    .px-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      min-height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--px-blue-light), var(--px-blue), var(--px-blue-dark));
+      color: white;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 0 24px rgba(56,199,255,0.26);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .px-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(56,199,255,0.38);
+    }
+
+    /* SHARED CARDS SECTIONS 2 + 4 */
+    .px-why,
+    .px-tarifs {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .px-why-header,
+    .px-tarifs-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .px-why-pill,
+    .px-tarifs-pill {
+      padding: 6px 16px;
+      background: rgba(6,17,28,0.52);
+      border: 1px solid rgba(56,199,255,0.45);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--px-blue-light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .px-why-pill-dot,
+    .px-tarifs-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--px-blue-light);
+      box-shadow: 0 0 6px var(--px-blue-light);
+      animation: pxDotPulse 2s infinite;
+    }
+
+    @keyframes pxDotPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    .px-why-title,
+    .px-tarifs-title {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0;
+      line-height: 1.05;
+      color: var(--px-white);
+      text-shadow: 0 0 18px rgba(56,199,255,0.4), 0 0 50px rgba(11,143,216,0.2);
+    }
+
+    .px-tarifs-title {
+      margin-bottom: 12px;
+    }
+
+    .px-why-title span,
+    .px-tarifs-title span {
+      color: var(--px-blue-light);
+    }
+
+    .px-tarifs-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .px-why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .px-why-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 66%;
+      margin: 0 auto;
+    }
+
+    .px-tarifs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .px-why-card,
+    .px-tarifs-card {
+      position: relative;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(56,199,255,0.18);
+      border-radius: 18px;
+      padding: 24px 20px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .px-why-card:hover,
+    .px-tarifs-card:hover {
+      border-color: rgba(56,199,255,0.5);
+      transform: translateY(-3px);
+    }
+
+    .px-why-card canvas,
+    .px-tarifs-card canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .px-why-card-content,
+    .px-tarifs-card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .px-why-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .px-why-card-title {
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--px-white);
+      margin: 0 0 8px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .px-why-card-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin: 0;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    .px-why-badge {
+      display: inline-block;
+      font-size: 11px;
+      background: rgba(56,199,255,0.1);
+      border: 1px solid rgba(56,199,255,0.3);
+      color: var(--px-blue-light);
+      border-radius: 6px;
+      padding: 2px 9px;
+      margin-top: 10px;
+      font-weight: 700;
+    }
+
+    /* SECTION 3 */
+    .repair-stage {
+      width: 100%;
+      max-width: 1180px;
+      min-height: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 270px 280px 360px;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 3vw, 48px);
+      perspective: 1500px;
+      position: relative;
+      padding: 34px 24px 86px;
+      overflow: visible;
+      animation: stageIntro 1s ease both;
+    }
+
+    @keyframes stageIntro {
+      from { opacity: 0; transform: translateY(30px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .phone-scene {
+      width: clamp(270px, 27vw, 340px);
+      height: clamp(530px, 56vw, 670px);
+      perspective: 1500px;
+      cursor: pointer;
+      position: relative;
+      justify-self: center;
+    }
+
+    .phone-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.15s cubic-bezier(.16,.84,.23,1);
+    }
+
+    .phone-scene:hover .phone-card:not(.is-repaired) {
+      animation: violentShake .23s infinite;
+    }
+
+    .phone-card.is-repaired {
+      transform: rotateY(180deg);
+    }
+
+    @keyframes violentShake {
+      0% { transform: translate3d(0,0,0) rotate(0deg); }
+      20% { transform: translate3d(-5px,2px,0) rotate(-1.1deg); }
+      40% { transform: translate3d(5px,-3px,0) rotate(1.2deg); }
+      60% { transform: translate3d(-3px,-1px,0) rotate(.8deg); }
+      80% { transform: translate3d(3px,2px,0) rotate(-.8deg); }
+      100% { transform: translate3d(0,0,0) rotate(0deg); }
+    }
+
+    .phone {
+      position: absolute;
+      inset: 0;
+      border-radius: 58px;
+      background: linear-gradient(145deg, #354052, #030712 42%, #111827);
+      border: 10px solid #111827;
+      overflow: hidden;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 0 44px 110px rgba(0,0,0,.76), 0 0 0 2px rgba(255,255,255,.12), inset 0 0 0 3px rgba(255,255,255,.04);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 124px;
+      height: 34px;
+      border-radius: 999px;
+      background: #02040a;
+      z-index: 80;
+    }
+
+    .phone::after {
+      content: "";
+      position: absolute;
+      top: 27px;
+      left: calc(50% + 40px);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #1e90ff, #06111f 66%);
+      z-index: 81;
+      box-shadow: 0 0 8px rgba(20,149,255,.75);
+    }
+
+    .screen {
+      position: absolute;
+      inset: 11px;
+      border-radius: 45px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 23px;
+      left: 24px;
+      right: 24px;
+      z-index: 60;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .icons { display: flex; align-items: center; gap: 5px; }
+    .signal { height: 12px; display: flex; align-items: flex-end; gap: 2px; }
+    .signal i { width: 3px; border-radius: 2px; background: #fff; }
+    .signal i:nth-child(1) { height: 4px; }
+    .signal i:nth-child(2) { height: 7px; }
+    .signal i:nth-child(3) { height: 10px; }
+
+    .wifi {
+      width: 15px;
+      height: 10px;
+      border: 2px solid white;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 12px 12px 0 0;
+      transform: translateY(3px);
+    }
+
+    .battery {
+      position: relative;
+      width: 20px;
+      height: 10px;
+      border: 1.8px solid white;
+      border-radius: 3px;
+    }
+
+    .battery::before {
+      content: "";
+      position: absolute;
+      inset: 2px 4px 2px 2px;
+      border-radius: 1px;
+      background: white;
+    }
+
+    .battery::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 2px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background: white;
+    }
+
+    .lock {
+      position: absolute;
+      top: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 62;
+      width: 20px;
+      height: 16px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.96);
+    }
+
+    .lock::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: -12px;
+      width: 12px;
+      height: 15px;
+      border: 3px solid rgba(255,255,255,.96);
+      border-bottom: 0;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .date {
+      position: absolute;
+      top: 116px;
+      left: 0;
+      right: 0;
+      z-index: 62;
+      text-align: center;
+      font-size: 20px;
+      opacity: .95;
+    }
+
+    .time {
+      position: absolute;
+      top: 143px;
+      left: 0;
+      right: 0;
+      z-index: 62;
+      text-align: center;
+      font-size: clamp(74px, 18vw, 94px);
+      line-height: 1;
+      font-weight: 200;
+      letter-spacing: -5px;
+      text-shadow: 0 8px 32px rgba(0,0,0,.65);
+    }
+
+    .bottom-ui {
+      position: absolute;
+      bottom: 22px;
+      left: 24px;
+      right: 24px;
+      z-index: 62;
+      display: grid;
+      grid-template-columns: 46px 1fr 46px;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .round-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.15);
+      backdrop-filter: blur(10px);
+      font-size: 19px;
+    }
+
+    .swipe {
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.25;
+      opacity: .94;
+    }
+
+    .homebar {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 135px;
+      height: 5px;
+      border-radius: 999px;
+      background: white;
+      z-index: 63;
+    }
+
+    .phone.broken { transform: rotateY(0deg) rotateZ(-2deg); }
+    .phone.fixed { transform: rotateY(180deg) rotateZ(2deg); box-shadow: 0 44px 120px rgba(0,0,0,.76), 0 0 42px rgba(20,149,255,.75); }
+
+    .broken .screen,
+    .broken-bg {
+      background: transparent;
+    }
+
+    .broken-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .glass-layer,
+    .flying-glass {
+      position: absolute;
+      inset: 0;
+      z-index: 46;
+      pointer-events: none;
+    }
+
+    .glass-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(112deg, transparent 0 18%, rgba(255,255,255,.25) 22%, transparent 34%), linear-gradient(38deg, transparent 0 63%, rgba(255,255,255,.08) 72%, transparent 100%);
+      mix-blend-mode: screen;
+      opacity: .84;
+    }
+
+    .glass-dust {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.95) 0 1px, transparent 1.5px), radial-gradient(circle, rgba(255,255,255,.56) 0 1px, transparent 1.4px), radial-gradient(circle, rgba(20,149,255,.55) 0 1px, transparent 1.5px);
+      background-size: 23px 29px, 47px 53px, 89px 67px;
+      opacity: .27;
+      mask-image: radial-gradient(circle at 51% 56%, black 0 58%, transparent 92%);
+    }
+
+    .shard {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(255,255,255,.3), rgba(255,255,255,.035));
+      border: 1px solid rgba(255,255,255,.38);
+      clip-path: polygon(var(--shape));
+      opacity: .84;
+    }
+
+    .s1 { --shape: 0 0, 100% 12%, 72% 100%, 12% 70%; width: 110px; height: 128px; left: 52px; top: 72px; }
+    .s2 { --shape: 8% 0, 100% 25%, 78% 100%, 0 74%; width: 140px; height: 150px; right: 28px; top: 88px; }
+    .s3 { --shape: 0 20%, 68% 0, 100% 82%, 18% 100%; width: 112px; height: 180px; left: 18px; top: 210px; }
+    .s4 { --shape: 20% 0, 100% 12%, 78% 76%, 0 100%; width: 170px; height: 150px; left: 110px; top: 305px; }
+    .s5 { --shape: 0 0, 100% 18%, 85% 100%, 24% 74%; width: 104px; height: 180px; right: 24px; top: 382px; }
+    .s6 { --shape: 18% 0, 100% 56%, 52% 100%, 0 36%; width: 94px; height: 116px; left: 38px; bottom: 92px; }
+    .s7 { --shape: 0 30%, 86% 0, 100% 100%, 24% 82%; width: 150px; height: 90px; left: 118px; bottom: 75px; }
+    .s8 { --shape: 12% 0, 100% 0, 80% 100%, 0 72%; width: 92px; height: 86px; right: 28px; bottom: 36px; }
+
+    svg.cracks {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 0 2px rgba(255,255,255,.82)) drop-shadow(0 0 7px rgba(20,149,255,.18));
+    }
+
+    .crack-soft,
+    .crack-core,
+    .crack-thin,
+    .crack-blue {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .crack-soft { stroke: rgba(255,255,255,.36); stroke-width: 4.2; filter: blur(.8px); }
+    .crack-core { stroke: rgba(255,255,255,.95); stroke-width: 1.6; }
+    .crack-thin { stroke: rgba(255,255,255,.75); stroke-width: .82; }
+    .crack-blue { stroke: rgba(20,149,255,.42); stroke-width: 1; }
+
+    .flying-glass {
+      inset: -70px;
+      z-index: 44;
+      overflow: visible;
+    }
+
+    .piece {
+      position: absolute;
+      width: var(--w);
+      height: var(--h);
+      left: var(--x);
+      top: var(--y);
+      clip-path: polygon(10% 0, 100% 35%, 62% 100%, 0 60%);
+      background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.12));
+      border: 1px solid rgba(255,255,255,.5);
+      transform: rotate(var(--r));
+      opacity: .76;
+    }
+
+    .p1 { --w: 24px; --h: 38px; --x: -22px; --y: 78px; --r: -24deg; }
+    .p2 { --w: 16px; --h: 24px; --x: 22px; --y: 182px; --r: 48deg; }
+    .p3 { --w: 30px; --h: 42px; --x: -40px; --y: 322px; --r: 16deg; }
+    .p4 { --w: 18px; --h: 30px; --x: 380px; --y: 172px; --r: -38deg; }
+    .p5 { --w: 27px; --h: 40px; --x: 408px; --y: 330px; --r: 22deg; }
+    .p6 { --w: 14px; --h: 22px; --x: 360px; --y: 520px; --r: 72deg; }
+    .p7 { --w: 35px; --h: 50px; --x: -12px; --y: 520px; --r: -52deg; }
+
+    .fixed .screen {
+      background: radial-gradient(circle at 58% 62%, rgba(20,149,255,.36), transparent 18%), linear-gradient(145deg, #07101d, #030711 55%, #000);
+    }
+
+    .premium-wallpaper,
+    .lamp,
+    .neon-phone,
+    .brand-block,
+    .repair-badge {
+      position: absolute;
+    }
+
+    .premium-wallpaper { inset: 0; background: transparent; }
+
+    .premium-wallpaper::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      right: -34px;
+      bottom: 0;
+      height: 44%;
+      background: linear-gradient(90deg, transparent 0 6%, rgba(20,149,255,.38) 7%, transparent 8% 18%, rgba(20,149,255,.45) 19%, transparent 20% 100%), repeating-linear-gradient(90deg, rgba(255,255,255,.1) 0 1px, transparent 1px 32px), repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 28px), linear-gradient(160deg, rgba(30,41,59,.92), rgba(2,6,23,.96));
+      transform: perspective(260px) rotateX(56deg) translateY(50px);
+      transform-origin: bottom center;
+      box-shadow: 0 -35px 74px rgba(20,149,255,.22);
+    }
+
+    .premium-wallpaper::after {
+      content: "";
+      position: absolute;
+      right: -44px;
+      bottom: 170px;
+      width: 180px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(20,149,255,.95) 0 2px, transparent 3px), radial-gradient(circle, rgba(255,255,255,.85) 0 1px, transparent 2px);
+      background-size: 20px 26px, 38px 42px;
+      mask-image: radial-gradient(circle at 50% 50%, black, transparent 76%);
+      opacity: .74;
+      animation: particles 3.3s ease-in-out infinite alternate;
+    }
+
+    @keyframes particles {
+      to { transform: translateY(-14px) translateX(-9px); opacity: .98; }
+    }
+
+    .lamp {
+      right: 26px;
+      top: 258px;
+      width: 92px;
+      height: 40px;
+      border-radius: 50% 50% 20% 20%;
+      background: linear-gradient(180deg, #253246, #030712);
+      transform: rotate(-22deg);
+      opacity: .64;
+      z-index: 4;
+    }
+
+    .neon-phone {
+      left: 83px;
+      bottom: 102px;
+      width: 190px;
+      height: 105px;
+      border-radius: 20px;
+      z-index: 5;
+      transform: perspective(300px) rotateX(62deg) rotateZ(-8deg);
+      background: linear-gradient(145deg, #020617, #0f172a);
+      border: 2px solid rgba(66,220,255,.95);
+      box-shadow: 0 0 22px rgba(20,149,255,.98), 0 0 62px rgba(20,149,255,.48), inset 0 0 20px rgba(20,149,255,.28);
+    }
+
+    .neon-phone::before {
+      content: "X";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 55px;
+      font-weight: 1000;
+      color: rgba(20,149,255,.92);
+      text-shadow: 0 0 18px rgba(20,149,255,.95);
+    }
+
+    .brand-block {
+      top: 246px;
+      left: 0;
+      right: 0;
+      z-index: 58;
+      padding: 0 24px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .logo-x {
+      margin-bottom: 8px;
+      font-size: 72px;
+      line-height: .78;
+      font-weight: 1000;
+      letter-spacing: -10px;
+      color: var(--blue);
+      text-shadow: 0 0 16px rgba(20,149,255,.95), 0 0 34px rgba(20,149,255,.55);
+    }
+
+    .brand-name {
+      font-size: 35px;
+      line-height: .95;
+      font-weight: 1000;
+      font-style: italic;
+      text-shadow: 0 8px 26px rgba(0,0,0,.68);
+    }
+
+    .brand-name span,
+    .effect span {
+      color: var(--blue);
+      text-shadow: 0 0 15px rgba(20,149,255,.78);
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .service {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .effect {
+      margin-top: 30px;
+      font-size: 23px;
+      line-height: 1.18;
+      font-weight: 1000;
+      font-style: italic;
+      text-shadow: 0 7px 24px rgba(0,0,0,.72);
+    }
+
+    .repair-badge {
+      left: 50%;
+      bottom: 158px;
+      transform: translateX(-50%);
+      z-index: 61;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid rgba(20,149,255,.96);
+      border-radius: 18px;
+      padding: 11px 17px;
+      color: var(--blue);
+      background: rgba(2,6,23,.58);
+      box-shadow: 0 0 22px rgba(20,149,255,.48), inset 0 0 20px rgba(20,149,255,.13);
+      font-weight: 1000;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .clock {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      border: 3px solid currentColor;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .clock::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 7px;
+      width: 3px;
+      height: 11px;
+      border-radius: 3px;
+      background: currentColor;
+    }
+
+    .clock::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 15px;
+      width: 11px;
+      height: 3px;
+      border-radius: 3px;
+      background: currentColor;
+      transform-origin: left center;
+      transform: rotate(30deg);
+    }
+
+    .repair-badge strong {
+      display: block;
+      color: white;
+      font-size: 15px;
+    }
+
+    .repair-badge span {
+      display: block;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .center-panel {
+      justify-self: center;
+      text-align: center;
+      pointer-events: none;
+      filter: drop-shadow(0 0 28px rgba(20,149,255,.35));
+      transform: translateY(-8px);
+    }
+
+    .before-after {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .before-after strong {
+      display: block;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .before-after span {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1;
+      color: white;
+    }
+
+    .before-after .after-time {
+      color: var(--blue);
+      text-shadow: 0 0 18px rgba(20,149,255,.75);
+      font-weight: 900;
+    }
+
+    .center-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 2px solid var(--blue);
+      border-radius: 20px;
+      background: rgba(2,6,23,.72);
+      color: var(--blue);
+      text-transform: uppercase;
+      font-weight: 1000;
+    }
+
+    .center-badge span {
+      display: block;
+      text-align: left;
+    }
+
+    .center-badge .big {
+      color: white;
+      font-size: 18px;
+    }
+
+    .center-badge .small {
+      color: var(--blue);
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .arrows {
+      margin: 34px auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .arrows i {
+      width: 34px;
+      height: 34px;
+      border-right: 11px solid var(--blue);
+      border-top: 11px solid var(--blue);
+      transform: rotate(45deg);
+      opacity: .35;
+      animation: arrowPulse 1.1s infinite;
+      filter: drop-shadow(0 0 8px rgba(20,149,255,.9));
+    }
+
+    .arrows i:nth-child(2) { animation-delay: .12s; }
+    .arrows i:nth-child(3) { animation-delay: .24s; }
+
+    @keyframes arrowPulse {
+      0%, 100% { opacity: .22; transform: rotate(45deg) translateX(0); }
+      50% { opacity: 1; transform: rotate(45deg) translateX(8px); }
+    }
+
+    .side-copy {
+      justify-self: center;
+      max-width: 245px;
+      text-transform: uppercase;
+    }
+
+    .side-copy h1 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: .9;
+      font-style: italic;
+      text-shadow: 0 0 24px rgba(20,149,255,.35);
+    }
+
+    .side-copy h1 span {
+      color: var(--blue);
+    }
+
+    .side-copy p {
+      margin: 16px 0 0;
+      color: rgba(255,255,255,.75);
+      font-size: 12px;
+      line-height: 1.5;
+      text-transform: none;
+    }
+
+    .qualities {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      gap: clamp(14px, 3vw, 46px);
+      width: min(96vw, 930px);
+      color: rgba(255,255,255,.9);
+    }
+
+    .quality {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+    }
+
+    .quality-icon {
+      width: 42px;
+      height: 42px;
+      border: 2px solid rgba(66,220,255,.95);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 0 18px rgba(20,149,255,.6);
+      font-weight: 900;
+    }
+
+    .quality strong {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .quality span {
+      display: block;
+      font-size: 11px;
+      opacity: .76;
+      text-transform: uppercase;
+    }
+
+    .flash,
+    .repair-rays {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .flash {
+      inset: -150px;
+      z-index: 200;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(255,255,255,.94), transparent 27%), radial-gradient(circle at center, rgba(20,149,255,.66), transparent 58%);
+    }
+
+    .repair-rays {
+      inset: -25%;
+      z-index: 199;
+      background: conic-gradient(from 90deg, transparent, rgba(20,149,255,.55), transparent, rgba(255,255,255,.55), transparent);
+      mix-blend-mode: screen;
+      filter: blur(10px);
+    }
+
+    .phone-scene.do-flash .flash { animation: flashAnim .8s ease-out; }
+    .phone-scene.do-flash .repair-rays { animation: raysAnim .85s ease-out; }
+
+    @keyframes flashAnim {
+      0% { opacity: 0; transform: scale(.65); }
+      30% { opacity: .95; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.45); }
+    }
+
+    @keyframes raysAnim {
+      0% { opacity: 0; transform: rotate(0deg) scale(.8); }
+      34% { opacity: .7; }
+      100% { opacity: 0; transform: rotate(160deg) scale(1.45); }
+    }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      bottom: -34px;
+      transform: translateX(-50%);
+      width: min(88vw, 420px);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255,255,255,.72);
+    }
+
+    /* SECTION 4 */
+    .px-device-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(56,199,255,0.15);
+    }
+
+    .px-device-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .px-device-name {
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--px-white);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .px-tarif-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .px-tarif-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .px-tarif-label {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+    }
+
+    .px-tarif-price {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--px-blue-light);
+      white-space: nowrap;
+    }
+
+    .px-tarif-price.free {
+      color: #4ade80;
+    }
+
+    .px-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .px-badge-garantie {
+      background: rgba(56,199,255,0.1);
+      border: 1px solid rgba(56,199,255,0.3);
+      color: var(--px-blue-light);
+    }
+
+    .px-badge-gratuit {
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+    }
+
+    .px-tarifs-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(56,199,255,0.18);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+
+    .px-tarifs-note-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .px-tarifs-note-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* SECTION 5 */
+    .px-experience {
+      position: relative;
+      width: min(1320px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+      background: transparent;
+      isolation: isolate;
+      overflow: visible;
+    }
+
+    .px-exp-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 0.9fr 1.12fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .px-exp-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+      padding: 30px 28px;
+      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 24px rgba(0,0,0,0.18);
+      transform: translateY(18px);
+      opacity: 0;
+      animation: cardIn 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .px-exp-card:nth-child(2) { animation-delay: .12s; }
+    .px-exp-card:nth-child(3) { animation-delay: .24s; }
+
+    .px-exp-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(20,151,232,0.42);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 32px rgba(20,151,232,0.15);
+    }
+
+    .px-exp-card > *:not(.px-dots-canvas) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .px-dots-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .px-main {
+      min-height: 420px;
+      padding: 34px;
+      border-color: rgba(20,151,232,0.35);
+      box-shadow: inset 0 1px 0 rgba(68,199,255,0.18), 0 4px 32px rgba(20,151,232,0.12);
+    }
+
+    .px-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: none;
+      border: none;
+      margin-bottom: 6px;
+    }
+
+    .px-exp-pill {
+      padding: 6px 13px;
+      background: rgba(20,151,232,0.12);
+      border: 1px solid rgba(20,151,232,0.30);
+      color: rgba(255,255,255,0.85);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .px-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #1497e8;
+    }
+
+    .px-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .px-number {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin: 0 0 14px;
+      font-size: clamp(56px, 7.6vw, 110px);
+      line-height: 0.86;
+      font-weight: 1000;
+      letter-spacing: -5px;
+      color: #fff;
+      text-shadow: 0 0 14px rgba(20,151,232,0.80), 0 0 40px rgba(20,151,232,0.32);
+    }
+
+    .px-main .px-number {
+      font-size: clamp(78px, 10vw, 142px);
+    }
+
+    .px-number small {
+      margin-bottom: 8px;
+      font-size: .34em;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .px-exp-title {
+      margin: 0 0 12px;
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.1;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .px-main .px-exp-title {
+      font-size: clamp(22px, 2.8vw, 34px);
+    }
+
+    .px-exp-text {
+      margin: 0;
+      max-width: 390px;
+      color: var(--soft);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .px-main .px-exp-text {
+      font-size: 16px;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .px-progress {
+      position: relative;
+      height: 5px;
+      margin-top: 28px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      overflow: hidden;
+    }
+
+    .px-progress span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--w);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue-deep), #1497e8, #fff);
+      transform-origin: left;
+      animation: progressGrow 1.4s ease both;
+    }
+
+    .px-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .px-ghost {
+      color: rgba(255,255,255,0.62);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .px-stars {
+      display: flex;
+      gap: 4px;
+      margin: 18px 0 10px;
+      color: #1497e8;
+      font-size: 21px;
+    }
+
+    .px-review-box {
+      position: relative;
+      margin-top: 14px;
+      padding: 13px;
+      min-height: 120px;
+      max-height: 152px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .px-review-box::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 40px;
+      background: linear-gradient(transparent, rgba(10,20,35,0.92));
+      pointer-events: none;
+    }
+
+    @keyframes cardIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes progressGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    /* RESPONSIVE GLOBAL */
+    @media (max-width: 1050px) {
+      .px-exp-content {
+        grid-template-columns: 1fr;
+      }
+
+      .px-exp-card,
+      .px-main {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .repair-stage {
+        grid-template-columns: 1fr;
+        min-height: 760px;
+        padding: 30px 16px 120px;
+      }
+
+      .center-panel,
+      .side-copy {
+        display: none;
+      }
+
+      .phone-scene {
+        width: clamp(290px, 72vw, 350px);
+        height: clamp(570px, 138vw, 690px);
+      }
+
+      .qualities {
+        flex-wrap: wrap;
+        bottom: 14px;
+        gap: 12px 22px;
+      }
+
+      .quality {
+        min-width: 145px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .px-about {
+        padding: 24px 16px;
+      }
+
+      .px-about-shell {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .px-visual {
+        max-height: 320px;
+      }
+
+      .px-why,
+      .px-tarifs {
+        padding: 40px 16px;
+      }
+
+      .px-why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .px-why-grid-bottom {
+        max-width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .px-tarifs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .px-button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .repair-stage {
+        min-height: 720px;
+        padding-bottom: 112px;
+      }
+
+      .qualities {
+        display: none;
+      }
+
+      .hint {
+        bottom: -38px;
+        width: 300px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .px-experience {
+        padding: 8px;
+      }
+
+      .px-exp-card,
+      .px-main {
+        padding: 22px 18px;
+        border-radius: 16px;
+      }
+
+      .px-head {
+        margin-bottom: 18px;
+      }
+
+      .px-number {
+        letter-spacing: -3px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .px-about {
+        padding: 20px 12px;
+      }
+
+      .px-visual {
+        max-height: 260px;
+      }
+
+      .px-values {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .px-value {
+        padding: 10px 8px;
+        font-size: 13px;
+      }
+
+      .px-about h1 {
+        font-size: 26px;
+        line-height: 1.1;
+      }
+
+      .px-lead {
+        font-size: 14px;
+      }
+
+      .px-text {
+        font-size: 13px;
+      }
+
+      .px-about-pill {
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+
+      .px-photo-note strong {
+        font-size: 16px;
+      }
+
+      .px-photo-note span {
+        font-size: 10px;
+      }
+
+      .px-why,
+      .px-tarifs {
+        padding: 32px 12px;
+      }
+
+      .px-why-grid,
+      .px-why-grid-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .px-why-title,
+      .px-tarifs-title {
+        font-size: 24px;
+      }
+
+      .px-tarif-row {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .phone-scene {
+        width: 310px;
+        height: 610px;
+      }
+
+      .time {
+        font-size: 70px;
+      }
+
+      .brand-block {
+        top: 222px;
+      }
+
+      .brand-name {
+        font-size: 30px;
+      }
+
+      .effect {
+        margin-top: 22px;
+        font-size: 19px;
+      }
+
+      .repair-badge {
+        bottom: 130px;
+        transform: translateX(-50%) scale(.86);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main class="px-page" id="pxPage">
 
-<div class="calc-agent">
-  <h2>Calculateur Agent / Manager</h2>
-  <p>Entre le total mensuel et ajuste selon la performance.</p>
+    <!-- SECTION 1 -->
+    <section class="px-about">
+      <div class="px-about-shell">
+        <div class="px-visual">
+          <img src="thomas.png" alt="Thomas dans son atelier Phone Xpress" />
+          <canvas id="pxParticles"></canvas>
 
-  <div class="input">
-    <input type="number" id="montant" placeholder="0" min="0">
-    <span class="unit">💎</span>
-  </div>
+          <div class="px-photo-note">
+            <strong>Thomas</strong>
+            <span>Votre Technicien</span>
+          </div>
+        </div>
 
-  <div class="buttons">
-    <button id="bad">Mauvais mois</button>
-     <button id="normal" class="active">Mois normal</button>
-    <button id="good">Très bon mois</button>
-  </div>
+        <div class="px-about-content">
+          <div class="px-about-pill">🛠️ Un seul expert, un vrai suivi</div>
 
-  <div class="result">
-    <div class="badge" id="taux">Taux : 0%</div>
-    <div class="big" id="gain">0</div>
-    <div class="small" id="detail">Entre un montant pour calculer.</div>
-  </div>
-</div>
+          <h1>Thomas, votre expert <span>Phone Xpress</span></h1>
 
-<script>
-const nf = new Intl.NumberFormat("fr-FR");
+          <p class="px-lead">
+            Votre téléphone ne passe pas de main en main : Thomas s'occupe personnellement de chaque réparation.
+          </p>
 
-const montant = document.getElementById("montant");
-const gain = document.getElementById("gain");
-const tauxEl = document.getElementById("taux");
-const detail = document.getElementById("detail");
-const normal = document.getElementById("normal");
-  
+          <p class="px-text">
+            Diagnostic, réparation, conseils : une approche simple, directe et efficace.
+          </p>
 
-const bad = document.getElementById("bad");
-const good = document.getElementById("good");
+          <div class="px-values">
+            <div class="px-value"><b>⚡</b>Rapide</div>
+            <div class="px-value"><b>🛠</b>Précis</div>
+            <div class="px-value"><b>🤝</b>Direct</div>
+          </div>
 
-let bonus = 1;
+          <div class="px-quote">
+            Pas d'intermédiaire : votre appareil est entre de bonnes mains.
+          </div>
 
-function getTaux(v){
-  if(v >= 3000000) return 3;
-  if(v >= 2000000) return 2.5;
-  if(v >= 1000000) return 2;
-  if(v > 0) return 1.5;
-  return 0;
-}
+          <a class="px-button" href="https://phonexpress.odoo.com/demande-de-devis" target="_blank" rel="noopener">
+            Demander un diagnostic
+          </a>
+        </div>
+      </div>
+    </section>
 
-function calcul(){
-  const v = Number(montant.value) || 0;
-  const taux = getTaux(v);
+    <!-- SECTION 2 -->
+    <section class="px-why">
+      <div class="px-why-header">
+        <div class="px-why-pill">
+          <div class="px-why-pill-dot"></div>
+          Nos engagements
+        </div>
+        <h2 class="px-why-title">Pourquoi choisir <span>Phone Xpress</span> ?</h2>
+      </div>
 
-  let base = Math.floor(v * taux / 100);
-  let final = Math.floor(base * bonus);
+      <div class="px-why-grid">
+        <div class="px-why-card">
+          <canvas></canvas>
+          <div class="px-why-card-content">
+            <span class="px-why-icon">🔧</span>
+            <div class="px-why-card-title">Pièces premium</div>
+            <p class="px-why-card-text">Uniquement des pièces d'origine ou équivalent OEM — aucun compromis sur la qualité.</p>
+          </div>
+        </div>
 
-  tauxEl.textContent = `Taux : ${String(taux).replace(".",",")}%`;
-  gain.textContent = nf.format(final);
+        <div class="px-why-card">
+          <canvas></canvas>
+          <div class="px-why-card-content">
+            <span class="px-why-icon">🛡️</span>
+            <div class="px-why-card-title">Garantie incluse</div>
+            <p class="px-why-card-text">Chaque réparation est couverte par une garantie. Si ça lâche, on s'en occupe.</p>
+          </div>
+        </div>
 
-  if(bonus === 0.7){
-    detail.textContent = "Mauvais mois : –30% appliqué.";
-  } else if(bonus === 1.3){
-    detail.textContent = "Très bon mois : +30% appliqué.";
-  } else {
-    detail.textContent = "Mois normal : aucun bonus ni malus.";
-  }
-}
+        <div class="px-why-card">
+          <canvas></canvas>
+          <div class="px-why-card-content">
+            <span class="px-why-icon">🚀</span>
+            <div class="px-why-card-title">Sans rendez-vous</div>
+            <p class="px-why-card-text">Passez directement — pas besoin de planifier. On vous prend en charge sur place.</p>
+          </div>
+        </div>
+      </div>
 
-montant.addEventListener("input", calcul);
+      <div class="px-why-grid-bottom">
+        <div class="px-why-card">
+          <canvas></canvas>
+          <div class="px-why-card-content">
+            <span class="px-why-icon">🔒</span>
+            <div class="px-why-card-title">Données protégées</div>
+            <p class="px-why-card-text">Votre téléphone reste entre les mains de Thomas. Vos données ne sont jamais exposées.</p>
+          </div>
+        </div>
 
-bad.onclick = () => {
-  bonus = 0.7;
-  bad.classList.add("active");
-  good.classList.remove("active");
-  calcul();
-};
+        <div class="px-why-card">
+          <canvas></canvas>
+          <div class="px-why-card-content">
+            <span class="px-why-icon">🇫🇷</span>
+            <div class="px-why-card-title">Accessoires 100% français</div>
+            <p class="px-why-card-text">Nos accessoires viennent d'un fournisseur français — qualité et circuit court garantis.</p>
+            <span class="px-why-badge">Fournisseur 🇫🇷</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-good.onclick = () => {
-  bonus = 1.3;
-  good.classList.add("active");
-  bad.classList.remove("active");
-  calcul();
-};
-  normal.onclick = () => {
-  bonus = 1;
-  normal.classList.add("active");
-  bad.classList.remove("active");
-  good.classList.remove("active");
-  calcul();
-};
+    <!-- SECTION 3 -->
+    <section class="repair-stage">
+      <section class="side-copy" aria-hidden="true">
+        <h1>PHONE<br><span>XPRESS</span></h1>
+        <p>Pas d’intermédiaire, que du service. Un écran cassé, un clic, et l’effet PhoneXpress transforme votre téléphone.</p>
+      </section>
 
-</script>
+      <section class="center-panel" aria-hidden="true">
+        <div class="before-after">
+          <div>
+            <strong>Avant</strong>
+            <span>10:00</span>
+          </div>
+          <div>
+            <strong>Après</strong>
+            <span class="after-time">10:30</span>
+          </div>
+        </div>
 
+        <div class="center-badge">
+          <div class="clock"></div>
+          <div>
+            <span class="big">Réparation</span>
+            <span class="small">30 min max</span>
+          </div>
+        </div>
+
+        <div class="arrows">
+          <i></i><i></i><i></i>
+        </div>
+      </section>
+
+      <section class="phone-scene" id="phoneScene" aria-label="Téléphone interactif PhoneXpress">
+        <div class="repair-rays"></div>
+        <div class="flash"></div>
+
+        <div class="phone-card" id="phoneCard">
+          <article class="phone broken" aria-label="Téléphone cassé avant réparation">
+            <div class="screen">
+              <div class="broken-bg"></div>
+
+              <div class="topbar">
+                <span>Orange F</span>
+                <div class="icons">
+                  <span class="signal"><i></i><i></i><i></i></span>
+                  <span class="wifi"></span>
+                  <span class="battery"></span>
+                </div>
+              </div>
+
+              <div class="lock"></div>
+              <div class="date">Lundi 20 Mai</div>
+              <div class="time">10:00</div>
+
+              <div class="glass-layer" aria-hidden="true">
+                <span class="shard s1"></span>
+                <span class="shard s2"></span>
+                <span class="shard s3"></span>
+                <span class="shard s4"></span>
+                <span class="shard s5"></span>
+                <span class="shard s6"></span>
+                <span class="shard s7"></span>
+                <span class="shard s8"></span>
+                <div class="glass-shine"></div>
+                <div class="glass-dust"></div>
+
+                <svg class="cracks" viewBox="0 0 390 740" preserveAspectRatio="none">
+                  <path class="crack-soft" d="M203 401 L172 332 L132 278 L88 210 L48 132" />
+                  <path class="crack-soft" d="M203 401 L245 338 L294 279 L342 208 L371 151" />
+                  <path class="crack-soft" d="M203 401 L155 444 L102 502 L55 591 L24 690" />
+                  <path class="crack-soft" d="M203 401 L228 473 L266 557 L310 651 L348 727" />
+                  <path class="crack-soft" d="M203 401 L206 486 L190 580 L198 704" />
+                  <path class="crack-soft" d="M203 401 L124 390 L60 360 L10 318" />
+                  <path class="crack-soft" d="M203 401 L282 410 L352 445 L390 486" />
+
+                  <path class="crack-core" d="M203 401 L172 332 L132 278 L88 210 L48 132" />
+                  <path class="crack-core" d="M203 401 L245 338 L294 279 L342 208 L371 151" />
+                  <path class="crack-core" d="M203 401 L155 444 L102 502 L55 591 L24 690" />
+                  <path class="crack-core" d="M203 401 L228 473 L266 557 L310 651 L348 727" />
+                  <path class="crack-core" d="M203 401 L206 486 L190 580 L198 704" />
+                  <path class="crack-core" d="M203 401 L124 390 L60 360 L10 318" />
+                  <path class="crack-core" d="M203 401 L282 410 L352 445 L390 486" />
+
+                  <path class="crack-thin" d="M172 332 L203 302 L226 260 L264 222" />
+                  <path class="crack-thin" d="M132 278 L87 298 L42 292" />
+                  <path class="crack-thin" d="M88 210 L124 158 L135 82" />
+                  <path class="crack-thin" d="M245 338 L283 352 L328 329" />
+                  <path class="crack-thin" d="M294 279 L303 232 L329 193" />
+                  <path class="crack-thin" d="M342 208 L321 149 L332 86" />
+                  <path class="crack-thin" d="M155 444 L116 427 L69 430" />
+                  <path class="crack-thin" d="M102 502 L143 550 L155 628" />
+                  <path class="crack-thin" d="M55 591 L92 637 L77 716" />
+                  <path class="crack-thin" d="M228 473 L185 526 L153 573" />
+                  <path class="crack-thin" d="M266 557 L226 609 L222 698" />
+                  <path class="crack-thin" d="M310 651 L286 704 L302 740" />
+                  <path class="crack-thin" d="M206 486 L255 500 L318 493" />
+                  <path class="crack-thin" d="M190 580 L142 648 L116 730" />
+                  <path class="crack-thin" d="M124 390 L93 344 L52 328" />
+                  <path class="crack-thin" d="M282 410 L319 374 L369 354" />
+                  <path class="crack-blue" d="M203 401 L239 440 L283 462 L330 528" />
+                  <path class="crack-blue" d="M203 401 L168 374 L118 350 L70 318" />
+                </svg>
+              </div>
+
+              <div class="flying-glass" aria-hidden="true">
+                <span class="piece p1"></span>
+                <span class="piece p2"></span>
+                <span class="piece p3"></span>
+                <span class="piece p4"></span>
+                <span class="piece p5"></span>
+                <span class="piece p6"></span>
+                <span class="piece p7"></span>
+              </div>
+
+              <div class="bottom-ui">
+                <div class="round-icon">🔦</div>
+                <div class="swipe">Balayez vers le haut<br>pour ouvrir</div>
+                <div class="round-icon">📷</div>
+              </div>
+              <div class="homebar"></div>
+            </div>
+          </article>
+
+          <article class="phone fixed" aria-label="Téléphone réparé après effet PhoneXpress">
+            <div class="screen">
+              <div class="premium-wallpaper"></div>
+              <div class="lamp"></div>
+              <div class="neon-phone"></div>
+
+              <div class="topbar">
+                <span>Orange F</span>
+                <div class="icons">
+                  <span class="signal"><i></i><i></i><i></i></span>
+                  <span class="wifi"></span>
+                  <span class="battery"></span>
+                </div>
+              </div>
+
+              <div class="lock"></div>
+              <div class="date">Lundi 20 Mai</div>
+              <div class="time">10:30</div>
+
+              <div class="brand-block">
+                <div class="logo-x">X</div>
+                <div class="brand-name">PHONE <span>XPRESS</span></div>
+                <div class="tagline">Réparation smartphone</div>
+                <div class="service">Pas d’intermédiaire, que du service</div>
+                <div class="effect">Voici l’effet<br><span>PhoneXpress</span><br>sur votre téléphone</div>
+              </div>
+
+              <div class="repair-badge">
+                <div class="clock"></div>
+                <div>
+                  <strong>Réparation</strong>
+                  <span>30 min max</span>
+                </div>
+              </div>
+
+              <div class="bottom-ui">
+                <div class="round-icon">🔦</div>
+                <div class="swipe">Écran réparé<br>comme neuf</div>
+                <div class="round-icon">📷</div>
+              </div>
+              <div class="homebar"></div>
+            </div>
+          </article>
+        </div>
+
+        <p class="hint" id="hint">Survole le téléphone pour le faire trembler, puis clique pour déclencher l’effet PhoneXpress.</p>
+      </section>
+
+      <section class="qualities" aria-hidden="true">
+        <div class="quality">
+          <div class="quality-icon">✓</div>
+          <div><strong>Rapide</strong><span>30 min max</span></div>
+        </div>
+        <div class="quality">
+          <div class="quality-icon">★</div>
+          <div><strong>Premium</strong><span>Pièces qualité</span></div>
+        </div>
+        <div class="quality">
+          <div class="quality-icon">⚡</div>
+          <div><strong>Efficace</strong><span>Résultat garanti</span></div>
+        </div>
+        <div class="quality">
+          <div class="quality-icon">⌁</div>
+          <div><strong>Service</strong><span>Sans intermédiaire</span></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="px-tarifs">
+      <div class="px-tarifs-header">
+        <div class="px-tarifs-pill">
+          <div class="px-tarifs-pill-dot"></div>
+          Nos tarifs
+        </div>
+        <h2 class="px-tarifs-title">Réparations <span>Phone Xpress</span></h2>
+        <p class="px-tarifs-subtitle">Diagnostic offert — Réparation garantie — Sans rendez-vous</p>
+      </div>
+
+      <div class="px-tarifs-grid">
+        <div class="px-tarifs-card">
+          <canvas></canvas>
+          <div class="px-tarifs-card-content">
+            <div class="px-device-header">
+              <span class="px-device-icon">🍎</span>
+              <span class="px-device-name">iPhone</span>
+            </div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Écran <span class="px-badge px-badge-garantie">Garanti</span></span><span class="px-tarif-price">à partir de 49€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Batterie</span><span class="px-tarif-price">à partir de 19€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Vitre arrière</span><span class="px-tarif-price">à partir de 69€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Connecteur de charge</span><span class="px-tarif-price">à partir de 29€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Diagnostic <span class="px-badge px-badge-gratuit">Offert</span></span><span class="px-tarif-price free">Gratuit</span></div>
+          </div>
+        </div>
+
+        <div class="px-tarifs-card">
+          <canvas></canvas>
+          <div class="px-tarifs-card-content">
+            <div class="px-device-header">
+              <span class="px-device-icon">📱</span>
+              <span class="px-device-name">Samsung</span>
+            </div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Écran <span class="px-badge px-badge-garantie">Garanti</span></span><span class="px-tarif-price">à partir de 49€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Batterie</span><span class="px-tarif-price">à partir de 29€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Vitre arrière</span><span class="px-tarif-price">à partir de 19€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Connecteur de charge</span><span class="px-tarif-price">à partir de 19€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Diagnostic <span class="px-badge px-badge-gratuit">Offert</span></span><span class="px-tarif-price free">Gratuit</span></div>
+          </div>
+        </div>
+
+        <div class="px-tarifs-card">
+          <canvas></canvas>
+          <div class="px-tarifs-card-content">
+            <div class="px-device-header">
+              <span class="px-device-icon">📟</span>
+              <span class="px-device-name">Tablettes &amp; produits connectés</span>
+            </div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Écran tablette <span class="px-badge px-badge-garantie">Garanti</span></span><span class="px-tarif-price">à partir de 49€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Montre connectée</span><span class="px-tarif-price">à partir de 69€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Trotinette éléctrique </span><span class="px-tarif-price">à partir de 19€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Diagnostic <span class="px-badge px-badge-gratuit">Offert</span></span><span class="px-tarif-price free">Gratuit</span></div>
+          </div>
+        </div>
+
+        <div class="px-tarifs-card">
+          <canvas></canvas>
+          <div class="px-tarifs-card-content">
+            <div class="px-device-header">
+              <span class="px-device-icon">🔧</span>
+              <span class="px-device-name">Autres marques</span>
+            </div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Xiaomi / Oppo / OnePlus</span><span class="px-tarif-price">à partir de 49€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Huawei / Honor</span><span class="px-tarif-price">à partir de 49€</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Toute autre marque</span><span class="px-tarif-price">Devis gratuit</span></div>
+            <div class="px-tarif-row"><span class="px-tarif-label">Diagnostic <span class="px-badge px-badge-gratuit">Offert</span></span><span class="px-tarif-price free">Gratuit</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-tarifs-note">
+        <span class="px-tarifs-note-icon">🛡️</span>
+        <p class="px-tarifs-note-text">Toutes les réparations sont effectuées par Thomas, votre technicien, sans intermédiaire. Chaque intervention est couverte par une garantie. Les prix indiqués sont des tarifs de départ — un devis précis vous est remis gratuitement après diagnostic.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="px-experience">
+      <section aria-label="Avantages Phone Xpress">
+        <div class="px-exp-content">
+          <article class="px-exp-card">
+            <canvas class="px-dots-canvas"></canvas>
+            <div class="px-head">
+              <span class="px-exp-pill"><span class="px-dot"></span>Confiance</span>
+              <div class="px-icon">✓</div>
+            </div>
+
+            <div class="px-number">+100</div>
+            <h2 class="px-exp-title">Clients satisfaits</h2>
+            <p class="px-exp-text">Des réparations propres, rapides et réalisées avec soin pour redonner vie à votre smartphone.</p>
+
+            <div class="px-progress">
+              <span style="--w:88%"></span>
+            </div>
+          </article>
+
+          <article class="px-exp-card px-main">
+            <canvas class="px-dots-canvas"></canvas>
+            <div class="px-head">
+              <span class="px-exp-pill"><span class="px-dot"></span>Réparation express</span>
+              <div class="px-icon">⚡</div>
+            </div>
+
+            <div class="px-number">30<small>min</small></div>
+            <h2 class="px-exp-title">Un délai moyen qui change tout</h2>
+            <p class="px-exp-text">Écran, batterie, vitre arrière, diagnostic : Phone Xpress va droit au problème pour vous faire gagner du temps.</p>
+
+            <div class="px-cta">
+              <a class="px-button" href="https://phonexpress.odoo.com/demande-de-devis" target="_blank" rel="noopener">
+                Lancer le diagnostic
+              </a>
+              <span class="px-ghost">Demande en ligne rapide</span>
+            </div>
+
+            <div class="px-progress">
+              <span style="--w:96%"></span>
+            </div>
+          </article>
+
+          <article class="px-exp-card">
+            <canvas class="px-dots-canvas"></canvas>
+            <div class="px-head">
+              <span class="px-exp-pill"><span class="px-dot"></span>Avis Google</span>
+              <div class="px-icon">★</div>
+            </div>
+
+            <div class="px-number">4.7<small>/5</small></div>
+            <h2 class="px-exp-title">Ils nous recommandent</h2>
+            <p class="px-exp-text">Plus de 120 avis clients : la preuve sociale qui rassure avant même la prise de contact.</p>
+
+            <div class="px-stars" aria-label="Note Google 4.7 sur 5">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+
+            <div class="px-review-box">
+              <script src="https://elfsightcdn.com/platform.js" async></script>
+              <div class="elfsight-app-5f89ed93-18d6-45b4-9700-fc37cce6187b" data-elfsight-app-lazy></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    function sendHeight() {
+      var h = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight
+      );
+
+      window.parent.postMessage({
+        frameId: 'px-complete-page',
+        iframeHeight: Math.ceil(h) + 30
+      }, '*');
+    }
+
+    window.addEventListener('load', function() {
+      sendHeight();
+      setTimeout(sendHeight, 300);
+      setTimeout(sendHeight, 800);
+      setTimeout(sendHeight, 1600);
+    });
+
+    window.addEventListener('resize', sendHeight);
+
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(sendHeight).observe(document.body);
+    }
+
+    /* SECTION 1 PARTICLES */
+    (function() {
+      const canvas = document.getElementById("pxParticles");
+      const container = document.querySelector(".px-visual");
+      if (!canvas || !container) return;
+
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let w = 0;
+      let h = 0;
+
+      const colors = [
+        "rgba(56,199,255,",
+        "rgba(11,143,216,",
+        "rgba(130,205,255,",
+        "rgba(160,185,200,",
+        "rgba(245,250,255,"
+      ];
+
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function resizeParticles() {
+        const rect = container.getBoundingClientRect();
+        w = rect.width;
+        h = rect.height;
+
+        canvas.width = w * window.devicePixelRatio;
+        canvas.height = h * window.devicePixelRatio;
+        ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+
+        createParticles();
+      }
+
+      function createParticles() {
+        particles = [];
+        const amount = w < 600 ? 95 : 165;
+
+        for (let i = 0; i < amount; i++) {
+          particles.push({
+            x: rand(w * 0.54, w * 0.98),
+            y: rand(h * 0.04, h * 0.94),
+            size: rand(1.5, 6.5),
+            speedX: rand(0.35, 1.6),
+            speedY: rand(-0.35, 0.45),
+            alpha: rand(0.35, 0.95),
+            color: colors[Math.floor(rand(0, colors.length))],
+            rot: rand(0, Math.PI * 2),
+            rotSpeed: rand(-0.035, 0.035),
+            glow: rand(6, 18),
+            type: Math.random() > 0.55 ? "shard" : "spark"
+          });
+        }
+      }
+
+      function drawParticle(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = p.alpha;
+
+        ctx.fillStyle = p.color + p.alpha + ")";
+        ctx.shadowColor = p.color + "0.95)";
+        ctx.shadowBlur = p.glow;
+
+        if (p.type === "shard") {
+          ctx.beginPath();
+          ctx.moveTo(-p.size, -p.size * 0.35);
+          ctx.lineTo(p.size * 1.5, -p.size * 0.2);
+          ctx.lineTo(p.size * 0.45, p.size);
+          ctx.lineTo(-p.size * 0.7, p.size * 0.45);
+          ctx.closePath();
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size * 0.42, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, w, h);
+
+        particles.forEach((p) => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.rot += p.rotSpeed;
+
+          if (p.x > w + 30 || p.y < -30 || p.y > h + 30) {
+            p.x = rand(w * 0.54, w * 0.78);
+            p.y = rand(h * 0.10, h * 0.88);
+            p.alpha = rand(0.35, 0.95);
+          }
+
+          drawParticle(p);
+        });
+
+        requestAnimationFrame(animateParticles);
+      }
+
+      window.addEventListener("resize", resizeParticles);
+      resizeParticles();
+      animateParticles();
+    })();
+
+    /* SECTIONS 2 + 4 CARD PARTICLES */
+    (function() {
+      function initCardParticles(selector) {
+        const cards = document.querySelectorAll(selector);
+
+        cards.forEach(function(card) {
+          var canvas = card.querySelector('canvas');
+          if (!canvas) return;
+
+          var ctx = canvas.getContext('2d');
+          var w = 0, h = 0, particles = [];
+
+          function rand(min, max) {
+            return Math.random() * (max - min) + min;
+          }
+
+          function init() {
+            var rect = card.getBoundingClientRect();
+            w = canvas.width = rect.width * window.devicePixelRatio;
+            h = canvas.height = rect.height * window.devicePixelRatio;
+            ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+            w = rect.width;
+            h = rect.height;
+
+            particles = [];
+            var count = Math.max(8, Math.floor((w * h) / 2800));
+
+            for (var i = 0; i < count; i++) {
+              particles.push({
+                x: rand(0, w),
+                y: rand(0, h),
+                r: rand(0.6, 2.2),
+                sx: (Math.random() - 0.5) * 0.45,
+                sy: (Math.random() - 0.5) * 0.45,
+                a: rand(0.2, 0.75),
+                blue: Math.random() > 0.45,
+                rot: rand(0, Math.PI * 2),
+                rotSpeed: (Math.random() - 0.5) * 0.03,
+                type: Math.random() > 0.6 ? 'shard' : 'circle'
+              });
+            }
+          }
+
+          function drawParticle(p) {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.globalAlpha = p.a;
+
+            var color = p.blue
+              ? 'rgba(56,199,255,' + p.a + ')'
+              : 'rgba(255,255,255,' + (p.a * 0.4) + ')';
+
+            ctx.fillStyle = color;
+            ctx.shadowColor = p.blue ? 'rgba(56,199,255,0.8)' : 'transparent';
+            ctx.shadowBlur = p.blue ? 6 : 0;
+
+            if (p.type === 'shard') {
+              ctx.beginPath();
+              ctx.moveTo(-p.r, -p.r * 0.4);
+              ctx.lineTo(p.r * 1.5, -p.r * 0.2);
+              ctx.lineTo(p.r * 0.5, p.r);
+              ctx.lineTo(-p.r * 0.7, p.r * 0.5);
+              ctx.closePath();
+              ctx.fill();
+            } else {
+              ctx.beginPath();
+              ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            ctx.restore();
+          }
+
+          function animate() {
+            ctx.clearRect(0, 0, w, h);
+
+            particles.forEach(function(p) {
+              p.x += p.sx;
+              p.y += p.sy;
+              p.rot += p.rotSpeed;
+
+              if (p.x < -10) p.x = w + 10;
+              if (p.x > w + 10) p.x = -10;
+              if (p.y < -10) p.y = h + 10;
+              if (p.y > h + 10) p.y = -10;
+
+              drawParticle(p);
+            });
+
+            requestAnimationFrame(animate);
+          }
+
+          init();
+          animate();
+          window.addEventListener('resize', init);
+        });
+      }
+
+      initCardParticles('.px-why-card');
+      initCardParticles('.px-tarifs-card');
+    })();
+
+    /* SECTION 3 INTERACTION */
+    (function() {
+      const phoneScene = document.getElementById('phoneScene');
+      const phoneCard = document.getElementById('phoneCard');
+      const hint = document.getElementById('hint');
+
+      if (!phoneScene || !phoneCard || !hint) return;
+
+      phoneScene.addEventListener('click', () => {
+        phoneCard.classList.toggle('is-repaired');
+
+        phoneScene.classList.remove('do-flash');
+        void phoneScene.offsetWidth;
+        phoneScene.classList.add('do-flash');
+
+        const repaired = phoneCard.classList.contains('is-repaired');
+        hint.textContent = repaired
+          ? '10:00 → 10:30 : réparation express en 30 minutes maximum. Clique pour revoir l’avant.'
+          : 'Survole le téléphone pour le faire trembler, puis clique pour déclencher l’effet PhoneXpress.';
+
+        setTimeout(sendHeight, 300);
+      });
+    })();
+
+    /* SECTION 5 DOTS */
+    (function() {
+      const COLORS = ['#1497e8', '#44c7ff', '#045a95', '#ffffff'];
+
+      function initDots(canvas) {
+        const ctx = canvas.getContext('2d');
+        const card = canvas.parentElement;
+        let dots = [];
+
+        function resize() {
+          canvas.width = card.offsetWidth;
+          canvas.height = card.offsetHeight;
+        }
+
+        function spawnDot() {
+          const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+          return {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 2.2 + 1.0,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            alpha: Math.random() * 0.55 + 0.18,
+            color,
+            life: 0,
+            maxLife: Math.random() * 280 + 180
+          };
+        }
+
+        function init() {
+          resize();
+          dots = Array.from({ length: 22 }, spawnDot);
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          for (let i = dots.length - 1; i >= 0; i--) {
+            const d = dots[i];
+            d.x += d.vx;
+            d.y += d.vy;
+            d.life++;
+
+            let a = d.alpha;
+            if (d.life < 40) a *= d.life / 40;
+            if (d.life > d.maxLife - 40) a *= (d.maxLife - d.life) / 40;
+
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+            ctx.fillStyle = d.color;
+            ctx.globalAlpha = Math.max(0, a);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            if (d.x < -4) d.x = canvas.width + 4;
+            if (d.x > canvas.width + 4) d.x = -4;
+            if (d.y < -4) d.y = canvas.height + 4;
+            if (d.y > canvas.height + 4) d.y = -4;
+
+            if (d.life >= d.maxLife) dots[i] = spawnDot();
+          }
+
+          requestAnimationFrame(draw);
+        }
+
+        init();
+        draw();
+
+        if ('ResizeObserver' in window) {
+          const ro = new ResizeObserver(resize);
+          ro.observe(card);
+        } else {
+          window.addEventListener('resize', resize);
+        }
+      }
+
+      document.querySelectorAll('.px-dots-canvas').forEach(initDots);
+    })();
+  </script>
 </body>
 </html>
+```
